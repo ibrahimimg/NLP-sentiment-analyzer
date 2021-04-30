@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sentimental Analyzer</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/main.css')}}">
+    
+    <script type="text/javascript">
+        function clean(){
+            document.getElementById('result').innerHTML = "";
+            window.location.replace("/");
+        }
+        function verify(){
+            document.getElementById('result').innerHTML = "";
+            var text = document.getElementById('myText').value;
+            var pattern = /\w+/;
+            if (pattern.test(text) != true){
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Sentiment Analyzer</h1>
+
+    <form id="myForm" action="" method="post" onsubmit="return verify()">
+        <div class="form-group">
+            <label for="Text">Type a Word, Phrase or Sentence</label>
+            <textarea name="text" class="form-control" id="myText" minlength="2"rows="5" autofocus="">{{text}}</textarea>
+        </div>
+
+        <input type="submit" class="btn btn-primary" name="submit" value="Analyze">
+        <input type="reset" class="btn btn-secondary" onclick="clean();" value="Restart">
+    </form>
+    <p></p>
+    <div id="result">
+    {%if result%}
+            <div id=info>
+                <h1>RESULT</h1>
+            </div>
+
+            {% if result == 'Positive' %}
+                <div class="alert alert-success" role="alert">
+                    <h2>{{result}} <sub>{{ confidence }}%</sub></h2>
+                </div>
+            {% elif result == 'Negative' %}
+                 <div class="alert alert-danger" role="alert">
+                    <h2>{{result}} <sub>{{ confidence }}%</sub></h2>
+                </div>
+            {% else %}
+                 <div class="alert alert-dark" role="alert">
+                    <h2>{{result}}</h2>
+                </div>
+            {% endif %}
+    {%endif%}
+    </div>
+    <footer>
+        &copy; ibrahim ishaka (2021)
+    </footer>
+    
+
+</body>
+</html>

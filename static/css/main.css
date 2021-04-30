@@ -1,0 +1,15 @@
+body{
+    margin: 100px;
+    text-align: center;
+    background-image: url('/static/images/bg.png');
+    background-size: cover;
+}
+
+footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+}
